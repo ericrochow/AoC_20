@@ -5,10 +5,6 @@ from utils import read_input
 ACCUMULATOR = 0
 CURRENT_POS = 0
 
-# TEST_INSTRUCTIONS = (
-# "nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6"
-# )
-
 
 def parse_line(line):
     line = line.split(" ")
@@ -62,26 +58,17 @@ def part_two(instructions):
         operations = 0
         temp_instructions = instructions.copy()
         temp_instructions[line] = toggle_operation(temp_instructions[line])
-        # stop_sign = parse_line(temp_instructions[-1])
         instruction = parse_line(temp_instructions[CURRENT_POS])
         while operations < 500:
-            # print(ACCUMULATOR)
-            # print(CURRENT_POS)
             operations += 1
             process_instruction(instruction)
             try:
                 instruction = parse_line(temp_instructions[CURRENT_POS])
-                # print(instruction)
-            # if instruction == stop_sign:
             except IndexError:
-                # print("MATCH")
-                # process_instruction(instruction)
                 return ACCUMULATOR
-        # print(f"Line {line} wasn't it.")
 
 
 if __name__ == "__main__":
     INPUT = read_input(8)
-    # INPUT = TEST_INSTRUCTIONS.split("\n")
     print(part_one(INPUT))
     print(part_two(INPUT))

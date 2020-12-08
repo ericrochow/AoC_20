@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from collections import deque
-
 from utils import read_input
 
 
@@ -42,34 +40,12 @@ def part_one(rules):
     return len(set(post))
 
 
-def part_two_bak(rules):
-    bags = 1
-    simple_db = build_db(rules)
-    to_look_up = deque()
-    for bag_inv in simple_db.get("shiny gold"):
-        bags += bag_inv["qty"]
-        to_look_up.appendleft(bag_inv["name"])
-    while True:
-        if to_look_up:
-            color = to_look_up.pop()
-            # pp(simple_db.get("shiny gold"))
-            for color in to_look_up:
-                more_to_look_up = deque()
-                for bag_inv in simple_db.get(color):
-                    bags += bag_inv["qty"]
-                    more_to_look_up.appendleft(bag_inv["name"])
-            to_look_up = more_to_look_up
-        else:
-            break
-    return bags
-
-
 def part_two(rules):
     simple_db = build_db(rules)
 
     total_bags_count = {}
 
-    def count_bags_inside(bag_to_count):
+    def bagception(bag_to_count):
         current_bag = simple_db.get(bag_to_count)
         bags_inside = []
         for bag in current_bag:
@@ -77,12 +53,12 @@ def part_two(rules):
             if total_bags_count.get(bag):
                 bags_inside.append(total_bags_count[bag] * current_bag[bag])
             else:
-                bags_inside.append(count_bags_inside(bag) * current_bag[bag])
+                bags_inside.append(bagception(bag) * current_bag[bag])
         total_bags = sum(bags_inside)
         total_bags_count[bag_to_count] = total_bags
         return total_bags
 
-    return count_bags_inside("shiny gold")
+    return bagception("shiny gold")
 
 
 if __name__ == "__main__":
