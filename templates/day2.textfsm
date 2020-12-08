@@ -1,0 +1,7 @@
+Value MIN_COUNT (\d+)
+Value MAX_COUNT (\d+)
+Value REQ_CHAR (\w)
+Value PASS (\S+)
+
+Start
+ ^${MIN_COUNT}-${MAX_COUNT} ${REQ_CHAR}: ${PASS}
