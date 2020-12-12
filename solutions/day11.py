@@ -69,19 +69,14 @@ def define_visible(coords: tuple[int], maxes: tuple[int]) -> list[tuple]:
     current_row, current_col = coords
     for card in define_cardinalities():
         path = []
-        while (
-            current_row >= 0
-            and current_col >= 0
-            and current_row < bottom_bound
-            and current_col < right_bound
-        ):
+        while current_row >= 0 and current_col >= 0:
             current_row += card[0]
             current_col += card[1]
             if (
                 current_row >= 0
-                and current_row < bottom_bound
+                and current_row < bottom_bound + 2
                 and current_col >= 0
-                and current_col < right_bound
+                and current_col < right_bound + 2
             ):
                 path.append((current_row, current_col))
             else:
@@ -90,9 +85,6 @@ def define_visible(coords: tuple[int], maxes: tuple[int]) -> list[tuple]:
         current_row, current_col = coords
         if len(path) > 0:
             visible.append(path)
-        import ipdb
-
-        ipdb.set_trace()
     return visible
 
 
@@ -208,17 +200,11 @@ def part_one(seat_chart: list) -> int:
 
 
 def part_two(seat_chart):
-    # TODO: Figure out why this passes the test input but fails the action input
     before = [list(row) for row in seat_chart]
-    # return len(seat_chart), len(seat_chart[0])
     while True:
         after = simulate_seat_change_p2(before, 5)
-        # tst = []
-        # for row in after:
-        # tst.append("".join(row))
-        # print("\n".join(tst))
-        # print("\n\n\n")
         if after == before:
+            print("\n".join(["".join(row) for row in after]))
             total_occupied = 0
             for row in after:
                 total_occupied += row.count("#")
