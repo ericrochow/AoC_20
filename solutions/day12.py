@@ -32,12 +32,33 @@ def part_one(instructions):
 
 
 def part_two(instructions):
+    east, north = 0, 0
     waypoint = (10, 1)
-    pass
+    directions = {"E": 1, "S": -1, "W": -1, "N": 1}
+    for instruction in instructions:
+        action = instruction[0]
+        value = int(instruction[1:])
+        if action == "F":
+            east = east + (waypoint[0] * value)
+            north = north + (waypoint[1] * value)
+        elif action == "N" or action == "S":
+            waypoint = (waypoint[0], waypoint[1] + directions[action] * value)
+        elif action == "E" or action == "W":
+            waypoint = (waypoint[0] + directions[action] * value, waypoint[1])
+        elif action == "R":
+            value = int(value / 90)
+            for i in range(1, value + 1):
+                # Rotate waypoint 90 deg clockwise
+                waypoint = (waypoint[1], waypoint[0] * -1)
+        elif action == "L" or action == "R":
+            value = int(value / 90)
+            for i in range(1, value + 1):
+                # Rotate waypoint 90 deg counterclockwise
+                waypoint = (waypoint[1] * -1, waypoint[0])
+    return abs(north) + abs(east)
 
 
 if __name__ == "__main__":
     INPUT = read_input(12)
-    INPUT = TEST_INPUT
     print(part_one(INPUT))
     print(part_two(INPUT))
