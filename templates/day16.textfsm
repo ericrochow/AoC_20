@@ -1,0 +1,6 @@
+Value RULE ([^:]+)
+Value LOW_RANGE (\d+-\d+)
+Value HIGH_RANGE (\d+-\d+)
+
+Start
+  ^${RULE}: ${LOW_RANGE} or ${HIGH_RANGE}
