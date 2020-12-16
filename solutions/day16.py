@@ -34,9 +34,7 @@ def ranges_to_numbers(valid_ranges: list) -> set:
         results = re.findall(r"\d+", valid_range)
         if results:
             low, high = int(results[0]), int(results[1]) + 1
-            print(range(low, high))
             valid_numbers.update(range(low, high))
-            print(valid_numbers)
     return valid_numbers
 
 
@@ -45,31 +43,42 @@ def define_nearby_tickets(ticket_info: list) -> list:
     nearby_found = False
     for line in ticket_info:
         if nearby_found:
-            nearby += line.split(",")
+            line = [int(num) for num in line.split(",")]
+            nearby.append(line)
+            # nearby += line.split(",")
         elif "nearby" in line:
             nearby_found = True
     return nearby
 
 
-def find_invalid_tickets(valid_numbers: list, nearby_tickets: list) -> list:
-    return [int(ticket) for ticket in nearby_tickets if ticket not in valid_numbers]
+def find_invalid_numbers(valid_numbers: list, nearby_tickets: list) -> list:
+    return [
+        # num for num for ticket in nearby_tickets if num not in valid_numbers
+        num
+        for ticket in nearby_tickets
+        for num in ticket
+        if num not in valid_numbers
+    ]
 
 
 def part_one(ticket_info):
     valid_ranges = find_valid_ranges(ticket_info)
     nearby_tickets = define_nearby_tickets(ticket_info)
     valid_numbers = ranges_to_numbers(valid_ranges)
-    invalid_tickets = find_invalid_tickets(valid_numbers, nearby_tickets)
-    print(invalid_tickets)
+    invalid_tickets = find_invalid_numbers(valid_numbers, nearby_tickets)
     return sum(invalid_tickets)
 
 
 def part_two(ticket_info):
-    pass
+    valid_ranges = find_valid_ranges(ticket_info)
+    nearby_tickets = define_nearby_tickets(ticket_info)
+    valid_numbers = ranges_to_numbers(valid_ranges)
+    invalid_tickets = find_invalid_numbers(valid_numbers, nearby_tickets)
+    return sum(invalid_tickets)
 
 
 if __name__ == "__main__":
     INPUT = read_input(16)
-    INPUT = TEST_INPUT
+    # INPUT = TEST_INPUT
     print(part_one(INPUT))
     print(part_two(INPUT))
