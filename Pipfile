@@ -17,8 +17,5 @@ flake8-bandit = "*"
 flake8-black = "*"
 flake8-simplify = "*"
 
-[requires]
-python_version = "3.9"
-
 [pipenv]
 allow_prereleases = true
