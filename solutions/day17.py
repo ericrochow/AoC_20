@@ -2,6 +2,8 @@
 
 from utils import read_input
 
+TEST_INPUT = ".#." "..#" "###"
+
 
 def part_one():
     pass
