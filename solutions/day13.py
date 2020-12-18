@@ -11,6 +11,12 @@ TEST_INPUT_3 = ["100", "67,x,7,59,61"]
 TEST_INPUT_4 = ["100", "1789,37,47,1889"]
 
 
+def tracer():
+    import ipdb
+
+    ipdb.set_trace()
+
+
 def enumerate_busses(bus_list: list) -> list:
     """"""
     en_list = list(enumerate(bus_list))
@@ -42,23 +48,31 @@ def part_one(earliest, bus_list):
 def part_two(bus_list):
     # TODO: Generate lists of departure times less than arbitrary max
     # Perform unions of bus`index` start times + index
-    arbitrary_min = 100000000000000
-    arbitrary_max = 1000000000000000
+    arbitrary_min = 500000000000000
+    # arbitrary_max = 1000000000000000
+    arbitrary_max = 500001000000000
     # start_list = {x for x in range(arbitrary_min, arbitrary_max)}
     start_list = set()
     bus_list = enumerate_busses(bus_list)
-    # for index, bus in enumerate(bus_list):
-    for index, bus in bus_list:
-        if bus != "x":
-            if start_list:
-                bus_starts = {x for x in start_list if (x + index) % int(bus) == 0}
-                start_list.intersection_update(bus_starts)
-            else:
+    while not start_list:
+        print(f"Trying between {arbitrary_min} and {arbitrary_max}")
+        start_list = {"empty"}
+        for index, bus in bus_list:
+            if start_list == {"empty"}:
                 start_list = {
                     x
                     for x in range(arbitrary_min, arbitrary_max)
                     if (x + index) % int(bus) == 0
                 }
+            elif start_list:
+                bus_starts = {x for x in start_list if (x + index) % int(bus) == 0}
+                start_list.intersection_update(bus_starts)
+            else:
+                break
+        if not start_list:
+            print(f"Not between {arbitrary_min} and {arbitrary_max}")
+        arbitrary_min += 1000000000
+        arbitrary_max += 1000000000
     return start_list.pop()
 
 
