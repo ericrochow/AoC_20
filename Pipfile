@@ -8,6 +8,7 @@ requests = "*"
 textfsm = "*"
 ipython = "*"
 pipenv = "*"
+tqdm = "*"
 
 [dev-packages]
 flake8 = "*"
