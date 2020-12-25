@@ -15,8 +15,8 @@ flake8 = "*"
 ipdb = "*"
 flake8-if-statements = "*"
 flake8-bandit = "*"
-flake8-black = "*"
 flake8-simplify = "*"
+black = "==19.3b0"
 
 [pipenv]
 allow_prereleases = true
