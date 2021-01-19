@@ -110,6 +110,6 @@ if __name__ == "__main__":
     INPUT = read_input(13)
     # INPUT = TEST_INPUT_5
     EARLIEST = int(INPUT[0])
-    BUS_LIST = [x for x in INPUT[1].split(",")]
+    BUS_LIST = INPUT[1].split(",")
     print(part_one(EARLIEST, BUS_LIST))
     print(part_two(BUS_LIST))

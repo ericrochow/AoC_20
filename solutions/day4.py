@@ -26,7 +26,7 @@ def create_db(passport_list):
 
 
 def validate_keys(entry):
-    return all([req in entry.keys() for req in REQUIRED_KEYS])
+    return all(req in entry.keys() for req in REQUIRED_KEYS)
 
 
 def validate_values(entry):

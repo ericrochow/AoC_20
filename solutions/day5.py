@@ -4,7 +4,7 @@ from utils import read_input
 
 
 def sort_seat_chart(seat_chart):
-    sorted_seat_chart = sorted([seat_id(seat) for seat in seat_chart])
+    sorted_seat_chart = sorted([find_seat_id(seat) for seat in seat_chart])
     return sorted_seat_chart
 
 
@@ -14,7 +14,7 @@ def binary_string_to_int(binary_string):
     return r
 
 
-def seat_id(position):
+def find_seat_id(position):
     binary_string = (
         position.replace("F", "0")
         .replace("L", "0")
@@ -27,17 +27,15 @@ def seat_id(position):
 
 def part_one(seat_chart):
     highest_id = sort_seat_chart(seat_chart).pop()
-    print(highest_id)
+    return highest_id
 
 
 def part_two(seat_chart):
     seat_ids = sort_seat_chart(seat_chart)
     last_id = seat_ids[0]
-    print(last_id)
     for seat in seat_ids[1:]:
         if seat != last_id + 1:
-            print(seat - 1)
-            break
+            return seat - 1
         last_id = seat
 
 

@@ -263,7 +263,6 @@ if __name__ == "__main__":
     # cups = deque([int(x) for x in INPUT])
     cups = list(INPUT)
     cup_ring = CupRing(cups)
-    ipdb.set_trace()
     # print(part_one(cups))
     cups = list(map(int, INPUT))
     # print(part_two(cups))
