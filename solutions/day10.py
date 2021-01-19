@@ -72,7 +72,7 @@ def count_permutations(adapters: list[int]) -> int:
 
 def part_one(adapters: list) -> int:
     adapters.sort()
-    ones, twos, threes = sort_adapters(adapters)
+    ones, _, threes = sort_adapters(adapters)
     return len(ones) * len(threes)
 
 

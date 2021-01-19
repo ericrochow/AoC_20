@@ -106,7 +106,7 @@ def simulate_change(pocket: dict) -> dict:
 
 def part_one(grid_input: list):
     pocket = define_cube_slice(grid_input)
-    for i in range(0, 6):
+    for _ in range(0, 6):
         pocket = simulate_change(pocket)
         ipdb.set_trace()
     return pocket
