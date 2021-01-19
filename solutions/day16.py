@@ -20,9 +20,7 @@ TEST_INPUT = [
 ]
 
 
-TEST_INPUT_2 = [
-    "",
-]
+TEST_INPUT_2 = [""]
 
 
 def find_valid_ranges(ticket_info: list) -> list:
@@ -155,7 +153,7 @@ def part_one(ticket_info):
 
 def part_two(ticket_info: list, parsed_rules: list):
     rules = define_ticket_rules(parsed_rules)
-    for rule_name, rule_values in rules.items():
+    for rule_name in rules.keys():
         rules[rule_name] = ranges_to_numbers(rules[rule_name])
     valid_numbers = set.union(*rules.values())
     my_ticket = define_my_ticket(ticket_info)

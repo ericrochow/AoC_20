@@ -2,13 +2,7 @@
 
 from utils import read_input
 
-TEST_INPUT = [
-    "F10",
-    "N3",
-    "F7",
-    "R90",
-    "F11",
-]
+TEST_INPUT = ["F10", "N3", "F7", "R90", "F11"]
 
 
 def part_one(instructions):
@@ -21,11 +15,11 @@ def part_one(instructions):
         value = int(instruction[1:])
         if action == "F":
             action = list(directions)[direction]
-        if action == "N" or action == "S":
+        if action in ["N", "S"]:
             north += directions[action] * value
-        elif action == "E" or action == "W":
+        elif action in ["E", "W"]:
             east += directions[action] * value
-        elif action == "L" or action == "R":
+        elif action in ["L", "R"]:
             value = int(value / 90)
             direction = (direction + (turns[action] * value)) % 4
     return abs(north) + abs(east)
@@ -41,18 +35,18 @@ def part_two(instructions):
         if action == "F":
             east = east + (waypoint[0] * value)
             north = north + (waypoint[1] * value)
-        elif action == "N" or action == "S":
+        elif action in ["N", "S"]:
             waypoint = (waypoint[0], waypoint[1] + directions[action] * value)
-        elif action == "E" or action == "W":
+        elif action == ["E", "W"]:
             waypoint = (waypoint[0] + directions[action] * value, waypoint[1])
         elif action == "R":
             value = int(value / 90)
-            for i in range(1, value + 1):
+            for _ in range(1, value + 1):
                 # Rotate waypoint 90 deg clockwise
                 waypoint = (waypoint[1], waypoint[0] * -1)
-        elif action == "L" or action == "R":
+        elif action in ["L", "R"]:
             value = int(value / 90)
-            for i in range(1, value + 1):
+            for _ in range(1, value + 1):
                 # Rotate waypoint 90 deg counterclockwise
                 waypoint = (waypoint[1] * -1, waypoint[0])
     return abs(north) + abs(east)
