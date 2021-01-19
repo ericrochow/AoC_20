@@ -48,11 +48,11 @@ def define_cube_slice(grid_input: list) -> dict:
     blank_grid = [["."] * 20] * 20
     grid_output = [["."] * 20] * 6
     for line in grid_input:
-        line = ["."] * pad + [x for x in line] + ["."] * pad
+        line = ["."] * pad + line + ["."] * pad
         if len(line) % 2 == 1:
             line.append(".")
         grid_output.append(line)
-    grid_output += ([["."] * 20] * 6)
+    grid_output += [["."] * 20] * 6
     big_cube = {}
     for i in range(0, 21):
         big_cube[i] = blank_grid

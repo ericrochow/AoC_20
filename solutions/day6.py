@@ -5,7 +5,7 @@ from utils import read_input
 
 def unique_answers(answers):
     answers = answers.replace("\n", "")
-    unique = {answer for answer in answers}
+    unique = set(answers)
     return len(unique)
 
 

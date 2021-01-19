@@ -26,7 +26,7 @@ def part_one(cypher: list[int], preamble_len: int = 25) -> int:
     """
     for index, entry in enumerate(cypher[preamble_len:], start=preamble_len):
         cypher_slice = cypher[index - preamble_len : index]
-        differences = [x for x in map(lambda y: abs(entry - y), cypher_slice)]
+        differences = list(map(lambda y: abs(entry - y), cypher_slice))
         if set(differences).intersection(set(cypher_slice)) == set():
             return entry
 
