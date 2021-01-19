@@ -153,8 +153,8 @@ def part_one(ticket_info):
 
 def part_two(ticket_info: list, parsed_rules: list):
     rules = define_ticket_rules(parsed_rules)
-    for rule_name in rules:
-        rules[rule_name] = ranges_to_numbers(rules[rule_name])
+    for rule_name, rule_value in rules.items():
+        rules[rule_name] = ranges_to_numbers(rule_value)
     valid_numbers = set.union(*rules.values())
     my_ticket = define_my_ticket(ticket_info)
     nearby_tickets = define_nearby_tickets(ticket_info)
