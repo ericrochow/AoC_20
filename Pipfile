@@ -9,6 +9,7 @@ textfsm = "*"
 ipython = "*"
 pipenv = "*"
 tqdm = "*"
+sympy = "*"
 
 [dev-packages]
 flake8 = "*"
