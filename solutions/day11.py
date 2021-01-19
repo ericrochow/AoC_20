@@ -73,10 +73,8 @@ def define_visible(coords: tuple[int], maxes: tuple[int]) -> list[tuple]:
             current_row += card[0]
             current_col += card[1]
             if (
-                current_row >= 0
-                and current_row < bottom_bound + 2
-                and current_col >= 0
-                and current_col < right_bound + 2
+                0 <= current_row < bottom_bound + 2
+                and 0 <= current_col < right_bound + 2
             ):
                 path.append((current_row, current_col))
             else:
@@ -128,7 +126,7 @@ def count_occupied_visible(visible: list[tuple], seat_chart: list[list]) -> int:
                 if seat_chart[coord[0]][coord[1]] == "#":
                     occupied += 1
                     break
-                elif seat_chart[coord[0]][coord[1]] == "L":
+                if seat_chart[coord[0]][coord[1]] == "L":
                     break
             except IndexError:
                 break

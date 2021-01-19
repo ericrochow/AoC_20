@@ -7,12 +7,7 @@ import re
 from utils import read_input
 
 
-TEST_INPUT_1 = [
-    "0: 1 2",
-    '1: "a"',
-    "2: 1 3 | 3 1",
-    '3: "b"',
-]
+TEST_INPUT_1 = ["0: 1 2", '1: "a"', "2: 1 3 | 3 1", '3: "b"']
 TEST_INPUT_2 = [
     "0: 4 1 5",
     "1: 2 3 | 3 2",
@@ -35,7 +30,7 @@ def generate_rules(file_input: list) -> dict:
         line = line.split()
         if not line:
             continue
-        elif line[0].endswith(":"):
+        if line[0].endswith(":"):
             rule_no = line[0].strip(":")
             try:
                 rule = " ".join(line[1:]).strip('"')

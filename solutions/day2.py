@@ -7,7 +7,7 @@ def part_one(parsed_input):
     count = 0
     for entry in parsed_input:
         occurances = entry[3].count(entry[2])
-        if occurances >= int(entry[0]) and occurances <= int(entry[1]):
+        if int(entry[0]) <= occurances <= int(entry[1]):
             count += 1
     return count
 
