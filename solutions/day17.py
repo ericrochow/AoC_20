@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import contextlib
 from copy import deepcopy
 import ipdb
 from itertools import product
@@ -48,7 +49,7 @@ def define_cube_slice(grid_input: list) -> dict:
     blank_grid = [["."] * 20] * 20
     grid_output = [["."] * 20] * 6
     for line in grid_input:
-        line = ["."] * pad + line + ["."] * pad
+        line = ["."] * pad + line.split() + ["."] * pad
         if len(line) % 2 == 1:
             line.append(".")
         grid_output.append(line)
@@ -83,14 +84,12 @@ def simulate_change(pocket: dict) -> dict:
                 active_neighbors = 0
                 neighbor_coords = define_neighbors(xindex, yindex, zindex)
                 for x, y, z in neighbor_coords:
-                    try:
+                    with contextlib.suppress([IndexError, KeyError]):
                         if pocket[z][y][x] == "#":
                             print("Coord: ", zindex, yindex, xindex)
                             print("Neighbor: ", z, y, x)
                             active_neighbors += 1
                             ipdb.set_trace()
-                    except (IndexError, KeyError):
-                        pass
                 if xval == "." and active_neighbors == 3:
                     print(pocket[zindex][yindex][xindex])
                     print(new_pocket[zindex][yindex][xindex])
